@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, escape
 import subprocess
 import sqlite3
 import hashlib
@@ -25,7 +25,8 @@ def ping():
 @app.route("/search")
 def search():
     query = request.args.get("q")
-    return "<h1>Results for: " + query + "</h1>"
+    safe_query = escape(query if query is not None else "")
+    return "<h1>Results for: " + safe_query + "</h1>"
 
 # Vulnerability 4: Weak hashing (CWE-328)
 @app.route("/register")
