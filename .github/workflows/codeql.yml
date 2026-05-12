@@ -8,7 +8,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze Java
+    name: Analyze Python
     runs-on: ubuntu-latest
     permissions:
       security-events: write
@@ -21,10 +21,7 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: java-kotlin
-
-      - name: Build code (CodeQL autobuild)
-        uses: github/codeql-action/autobuild@v3
+          languages: python
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
