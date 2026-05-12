@@ -36,6 +36,12 @@ def register():
 
 # Vulnerability 5: Hardcoded secret (CWE-798)
 API_KEY = "sk-1234567890abcdef"
-
+# Vulnerability 6: Path Traversal (CWE-22)
+@app.route("/file")
+def read_file():
+    filename = request.args.get("name")
+    with open("/var/data/" + filename, "r") as f:
+        return f.read()
+        
 if __name__ == "__main__":
     app.run(debug=True)
